@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+
+   
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+ 
+      <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
+       <link href="css/ratchet.min.css" rel="stylesheet">
+
+          <script src="js/uikit.js"></script>
+          <script src="js/ratchet.js"></script>
+             <link rel="stylesheet" type="text/css" href="css/index.css" />
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+
+   
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+   
+ 
+      <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
+       <link href="css/ratchet.min.css" rel="stylesheet">
+
+          <script src="js/uikit.js"></script>
+          <script src="js/ratchet.js"></script>
+             <link rel="stylesheet" type="text/css" href="css/index.css" />
+                    <script type="text/javascript" src="cordova.js"></script>
+  
+    <title>Hello World</title>
+</head>
+
+<body>
+    <div class="login_form" style="margin:30% 10% 10% 10%;">
+    <div class="uk-panel uk-panel-box">LOGIN</div>
+      <form class="input-group">
+  <div class="input-row">
+    <label>EMAIL</label>
+    <input type="text" placeholder="email" id="user_id" name="user_id">
+  </div>
+  <div class="input-row">
+    <label>PASSWORD</label>
+    <input type="password" placeholder="password" id="password" name="password">
+  </div>
+  <span class="btn btn-positive btn-block" id="login_btn">로그인</span>
+  <span class="btn btn-negative btn-block" id="find_pw_btn">비밀번호찾기</span>
+  <span class="btn btn-primary btn-block" id="join_btn" onclick="join_press();">회원가입</span>
+</form>
+    </div>
+  
+
+<div id="find_pw_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="member_modal_title">PASSWORD FIND</h2>
+                                    </div>
+                                    <p id="member_modal_contents">
+      <form class="input-group">
+  <div class="input-row">
+    <label>YOUR EMAIL</label>
+    <input type="text" placeholder="email" id="email" name="email">
+  </div>
+<p>YOUR JOIN EMAIL </p>
+  
+</form>
+                                    </p>
+                                    <div class="uk-modal-footer uk-text-right" id="find_pw_modal_btn">
+                                        <button type="button" class="uk-button">Cancel</button>
+                                        <span type="button" class="uk-button uk-button-primary" id="find_pw_submit">Find</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                <div id="join_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="member_modal_title">회원가입</h2>
+                                    </div>
+                                    <p id="member_join_modal_contents">
+      <form class="input-group">
+       <div class="input-row">
+    <label>이름</label>
+    <input type="text" placeholder="실명을 입력하세요." id="user_name" name="user_name">
+  </div>
+  <div class="input-row">
+    <label>이메일</label>
+    <input type="text" placeholder="email을 입력하세요." id="join_email" name="join_email">
+  </div>
+   <div class="input-row">
+    <label>전화번호</label>
+    <input type="text" placeholder="전화번호를 입력하세요." id="join_telephone" name="join_telephone" readonly>
+  </div>
+<div class="input-row">
+   <label>비밀번호</label>
+    <input type="text" placeholder="비밀번호를 입력하세요." id="join_pw1" name="join_pw1">
+  </div>
+
+<div class="input-row">
+<label>비밀번호</label>
+    <input type="text" placeholder="비밀번호를 확인하세요." id="join_pw2" name="join_pw2">
+  </div>
+<div class="input-row">
+<label>닉네임</label>
+    <input type="text" placeholder="닉네님" id="nick_name" name="nick_name">
+  </div>
+</form>
+                                    </p>
+                                    <div class="uk-modal-footer uk-text-right" id="join_modal_btn">
+                                        <button type="button" class="uk-button uk-modal-close">취소</button>
+                                        <span type="button" class="uk-button uk-button-primary" id="join_submit" onclick="save_member();">회원가입</span>
+                                    </div>
+                                </div>
+                            </div>
+
+     <script type="text/javascript" charset="utf-8" src="js/PushNotification.js"></script>
+
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+
+</html>

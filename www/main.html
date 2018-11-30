@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' gallerybear.com * gap: ws: https://ssl.gstatic.com;img-src * data: content:;style-src 'self' 'unsafe-inline' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
+
+
+   
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+ 
+     
+       <link href="css/ratchet.min.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="css/uikit.gradient.min.css">
+
+          <script src="js/uikit.js"></script>
+          <script src="js/ratchet.js"></script>
+             <link rel="stylesheet" type="text/css" href="css/app.css" />
+                   <link href="css/style.css" rel="stylesheet">
+                    <script type="text/javascript" src="cordova.js"></script>
+                    <script type="text/javascript" src="js/components/notify.min.js"></script>
+    <title>Hello World</title>
+</head>
+
+<body style="background-color: #ebebeb;">
+<div id="main_contents" style="overflow-y: scroll; width:100%; height:100%;  padding-bottom: 50px;">
+
+<div class="uk-grid" style="margin-top:5px;">
+  <div class="uk-width-1-2"><img src="image/logo.png" style="width:70%; margin:2%;"><br /><img src="image/logos.png" style="margin:2%"></div>
+  <div class="uk-width-1-2 uk-text-right">지역선도대학육성사업</div>
+</div>
+<div class="uk-grid" >
+ <article id="today" class="uk-width-1-1">
+      <section>       
+        <dl>
+          <dt id="today_category"></dt>
+          <dd id="today_contents">
+          
+            <a href="/proc/engforeign_read.jsp?id=1" class="btn01"><span>자세히 보기</span></a>
+          </dd>
+        </dl>
+      </section>
+    </article>
+
+    
+
+  
+</div>
+<img src="image/main.jpg" class="uk-width-1-1">
+<article id="quick">
+      <section class="quick01" style='background:url("image/quick01.png") #898989 50% 30% no-repeat; background-size:32%'>생활 한국어 <a href="#" onclick="open_url('http://ksarangbang.wsu.ac.kr/proc/engforeign_list.jsp?s_category_id=1')">1</a> / <a href="#" onclick="open_url('http://ksarangbang.wsu.ac.kr/proc/engforeign_list.jsp?s_category_id=2')">2</a></section>
+      <section class="quick02" style="background:url('image/quick02.png') #ffa500 50% 30% no-repeat; background-size:39%">명언<a href="#" onclick="open_url('http://ksarangbang.wsu.ac.kr/proc/engforeign_list.jsp?s_category_id=5')" class="more"></a></section>
+      <section class="quick03" style="background:url('image/quick03.png') #d81159 50% 30% no-repeat; background-size:30%">시사 한국어<a href="#" onclick="open_url('http://ksarangbang.wsu.ac.kr/proc/engforeign_list.jsp?s_category_id=3')" class="more"></a></section>
+      <section class="quick04" style="background:url('image/quick04.png') #22b1e6 50% 30% no-repeat; background-size:35%">관용어<a href="#" onclick="open_url('http://ksarangbang.wsu.ac.kr/proc/engforeign_list.jsp?s_category_id=4')" class="more"></a></section>
+    </article>
+
+<a href="#" class="btn022 uk-width-1-1"  onclick="cordova.InAppBrowser.open('http://www.cnuconsortium.ac.kr', '_blank', 'location=no')">지역선도대학육성사업단 홈페이지</a>
+</div>
+
+
+
+
+<div id="offcanvas-right" class="uk-offcanvas" aria-hidden="true" >
+
+                                <div class="uk-offcanvas-bar uk-offcanvas-bar-flip" mode="push" id="right_menu">
+ <ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav="">
+                                        <li><a href="#" onclick="about_show()">회사소개</a></li>
+                                      
+                                    
+
+                                        <li><a href="#" onclick="exit_show()">종료</a></li>
+                                        
+                                    </ul>
+                                   
+
+                                </div>
+
+                            </div>
+
+<div id="add_contents_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="add_modal_title">Loading</h2>
+                                    </div>
+                                    <p id="add_modal_contents">LOADING DATA...</p>
+                                    <div class="uk-modal-footer uk-text-right" id="modal_btn">
+                                   
+                                    </div>
+                                </div>
+                            </div>
+
+<div id="contents_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="modal_title">Loading</h2>
+                                    </div>
+                                    <p id="modal_contents">LOADING DATA...</p>
+                                    <div class="uk-modal-footer uk-text-right" id="modal_btn">
+                                        <button type="button" class="uk-button uk-modal-close">닫기</button> 
+                                       
+                                    </div>
+                                </div>
+                            </div>
+<div id="make_chat_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="member_modal_title">방만들기</h2>
+                                    </div>
+                                    <p id="member_modal_contents">
+                                    <form class="uk-form">
+
+    <fieldset data-uk-margin>
+        <legend>방정보를 입력하세요.</legend>
+        <input type="text" name="chat_room_title" id="chat_room_title" placeholder="방 제목을 입력하세요.">
+        
+        <select name="chat_mode" id="chat_mode">
+            <option value="2">비공개</option>
+            <option value="1">공개</option>
+        </select>
+        
+    </fieldset>
+
+</form>
+                                    </p>
+                                    <div class="uk-modal-footer uk-text-right" id="member_modal_btn">
+                                   <button type="button" class="uk-button uk-modal-close">닫기</button> 
+                                    <a href=# class="uk-button uk-button-success" onclick="make_chat_room()">방만들기</a> 
+                                    </div>
+                                </div>
+                            </div>
+
+<div id="member_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="member_modal_title">MEMBER INFO</h2>
+                                    </div>
+                                    <p id="member_modal_contents">LOADING DATA...</p>
+                                    <div class="uk-modal-footer uk-text-right" id="member_modal_btn">
+                                   
+                                    </div>
+                                </div>
+                            </div>
+
+<div id="mypage_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="mypage_modal_title">MEMBER INFO</h2>
+                                    </div>
+                                    <p id="mypage_modal_contents">LOADING DATA...</p>
+                                    <div class="uk-modal-footer uk-text-right" id="member_modal_btn">
+                                     
+                                    </div>
+                                </div>
+                            </div>
+
+
+<div id="shop_uk_modal" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll;">
+                                <div class="uk-modal-dialog">
+                                    <button type="button" class="uk-modal-close uk-close"></button>
+                                    <div class="uk-modal-header">
+                                        <h2 id="shop_modal_title">SHOP INFOMATION</h2>
+                                    </div>  <div class="uk-overflow-container" style="max-height: 468px;">
+                                    <p id="shop_modal_contents">LOADING DATA...</p></div>
+                                    <div class="uk-modal-footer uk-text-right" id="shop_modal_btn">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+<div id="modal_chat" class="uk-modal" aria-hidden="true" style="display: none; overflow-y: scroll; ">
+                            <div class="uk-modal-dialog uk-modal-dialog-large">
+                                <button type="button" class="uk-modal-close uk-close"></button>
+                                <h1>CHATTING ROOM</h1>
+                                
+                   
+                                <div class="uk-overflow-container" id="chat_body" style="max-height: 464px;">
+                                    
+                                </div>
+                                
+                                <p>
+                                  <div class="input-group margin-bottom-20">
+        <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+        <input type="hidden" name="room_no" value="" id="room_no">
+        <input type="text" class="form-control" placeholder="MESSAGE" id="chat_msg" onclick="gotop();">
+      </div><a href="#" class="uk-width-1-1 uk-button uk-button-success" id="send_btn" onclick="getImage('1','chat');">SEND</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        
+
+<div id="member_info_modal" class="modal">
+  <header class="bar bar-nav">
+    <a class="icon icon-close pull-right" href="#member_info_modal"></a>
+    <h1 class="title">MEMBER INFOMATION</h1>
+  </header>
+
+  <div class="content">
+    <p class="content-padded" id="member_info_div">LOADING... CONTENTS</p>
+  </div>
+</div>
+
+
+
+<div id="contents_modal" class="modal">
+  <header class="bar bar-nav">
+    <a class="icon icon-close pull-right" href="#contents_modal"></a>
+    <h1 class="title" id="contents_modal_title">LOADING CONTENTS</h1>
+  </header>
+
+  <div class="content">
+    <p class="content-padded" id="contents_div">LOADING... CONTENTS</p>
+  </div>
+</div>
+
+
+<nav class="bar bar-tab bar-footer">
+  <a class="tab-item active" id="main_icon" href="#" >
+    <span class="icon icon-home"></span>
+    <span class="tab-label">홈</span>
+  </a>
+ 
+  
+
+ 
+   <a class="tab-item" href="#" id="shop_icon" href="#"  >
+    <span class="icon uk-icon-gear"></span>
+    <span class="tab-label">설정</span>
+  </a>
+ 
+</nav>
+     <script type="text/javascript" charset="utf-8" src="js/PushNotification.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+   <script type="text/javascript" src="js/marker.js"></script>
+    
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+     <script type="text/javascript" src="js/common.js"></script>
+     <script type="text/javascript" src="js/camera.js"></script>
+     <script type="text/javascript" src="js/comment.js"></script>
+     <script type="text/javascript" src="js/chat.js"></script>
+     <script type="text/javascript" src="js/right_menu.js"></script>
+     <script type="text/javascript" src="js/board.js"></script> 
+     <script type="text/javascript" src="js/talk.js"></script> 
+
+   
+ 
+
+
+
+</body>
+
+
+</html>
+<script>
+today_contents();
+ // setInterval("check_msg()", 1000);
+</script> 
