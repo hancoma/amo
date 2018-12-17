@@ -37,6 +37,7 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+   
 <script type="text/javascript" src="js/jquery.min.js"></script>
      <script type="text/javascript" charset="utf-8" src="js/PushNotification.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
@@ -44,7 +45,7 @@
 </head>
 
 <body>
-    <div class="app">
+    <div class="app" style="display:none;">
         <h1></h1>
         <div id="deviceready" class="blink">
             <p class="event listening">접속 중</p>
@@ -54,7 +55,8 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-        app.initialize();
+          app.initialize();
+
     </script>
 </body>
 

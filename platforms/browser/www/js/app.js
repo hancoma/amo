@@ -17,7 +17,7 @@
  * under the License.
  */
  var push;
-
+var duration=5;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -51,7 +51,10 @@ var app = {
     },
     onmain : function() {
          // main_show();
-          
+           navigator.splashscreen.show();
+        window.setTimeout(function () {
+            navigator.splashscreen.hide();
+        }, 1000 * duration);
     var reg_id=device.uuid;
        // 기기 번호 검출 
 
