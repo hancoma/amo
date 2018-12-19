@@ -171,11 +171,19 @@ function app_version_check(version) {
      var version_data = JSON.parse(data);
      var check_version=version_data.version;
      if (check_version!=version) {
-      var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
+
+      navigator.notification.confirm(
+    '새로운 버전이 나왔습니다. 다운 받으신후 다시 이용해주세요.!', // message
+     onConfirm_update,            // callback to invoke with index of button pressed
+    '업데이트',           // title
+    ['업데이트','종료']     // buttonLabels
+    );
+
+      //var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
 
        
 
-      alert("버전이 다릅니다. 업데이트 후 이용해주세요.");
+      //alert("버전이 다릅니다. 업데이트 후 이용해주세요.");
       return;
       
      } else {
@@ -187,6 +195,17 @@ function app_version_check(version) {
    })
 
 }
+
+function onConfirm_update(buttonIndex) {
+      var buttonIndex=buttonIndex;
+      if (buttonIndex==1) {
+          var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
+      } else if (buttonIndex==2) {
+        navigator.app.exitApp();
+      }
+    
+}
+
 function json_call(reg_id) {
       var reg_id=reg_id;
       var deviceid=device.uuid;
