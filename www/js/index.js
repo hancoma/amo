@@ -17,6 +17,7 @@
  * under the License.
  */
  var telephone_number; // 전화번호 전역 함수 
+ var version="1.0.0";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -83,6 +84,7 @@ var app = {
 push.on('registration', function(data) {
     console.log(data.registrationId);
    // alert(data.registrationId);
+   save_reg_id(data.registrationId);
     json_call(data.registrationId);
    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com', '_blank', 'location=no');
    ref .addEventListener('exit', exit_show);
@@ -111,8 +113,52 @@ push.on('error', function(e) {
 
 };
   
+function save_reg_id(reg_id) {
+    var reg_id=reg_id;
+    var cordova=device.cordova;
+    var model=device.model;
+    var platform=device.platform;
+    var uuid=device.uuid;
+    var version=device.version;
+    var manufacturer=device.manufacturer;
+    var isVirtual=device.isVirtual;
+    var serial=device.serial;
+    var uuid_json='[{"cordova" : "'+cordova+'","model" : "'+model+'","platform" : "'+platform+'","uuid" : "'+uuid+'","version" : "1.0","manufacturer" : "'+manufacturer+'","isVirtual" : "'+isVirtual+'","serial" : "'+serial+'","registration_id":"'+reg_id+'"}]';
+    var data_json='{ "app_data":'+uuid_json+'}';
+  
 
 
+    //console.log(data_json);
+    $.ajax({
+    url: "https://api-dev.cloudbric.com/v2/mobile/device",
+    beforeSend: function(xhr) { 
+      xhr.setRequestHeader("X-Cloudbric-Key", "zzg0cockog4g0sk4kgcc44ow0go40sw88wkkg8ks"); 
+    },
+    type: 'POST',
+     dataType : "jsonp",
+  crossDomain: true,
+
+  
+    processData: false,
+   contentType:'application/json; charset=utf-8',
+   
+     
+
+    success: function (data) {
+
+      var data = JSON.stringify(data);
+         console.log(data);
+      var member_data = JSON.parse(data);
+       console.log("data : "+member_data);
+
+    },
+    error: function(data){
+       var data = JSON.stringify(data);
+         console.log(data);
+      alert("error");
+    }
+});
+   }
 
 function json_call(reg_id) {
       var reg_id=reg_id;

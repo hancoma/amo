@@ -28,7 +28,16 @@
    <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2"/>
   <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0"/>
   <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
- 
+ <universal-links>
+    <host name="cloudbric.page.link" scheme="https" />
+    <host name="cloudbric-app.firebaseapp.com" scheme="https">
+        <path url="/__/auth/callback"/>
+    </host>
+</universal-links>
+<preference name="AndroidLaunchMode" value="singleTask" />
+<preference name='phonegap-version' value='cli-6.5.0' />
+<preference name='pgb-builder-version' value='2' />
+
   <preference name="android-build-tool" value="gradle" />
 <plugin name="phonegap-plugin-push" spec="1.8.4" >
   <plugin name='phonegap-plugin-push' />

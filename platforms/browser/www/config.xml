@@ -10,6 +10,12 @@
     <description>글라우드브릭</description>
     <author email="ch7@daum.net" href="http://atopynews.co.kr">김대경</author>
     <content src="index.html" />
+    <universal-links>
+        <host name="cloudbric.page.link" scheme="https" />
+        <host name="cloudbric-app.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback" />
+        </host>
+    </universal-links>
     <icon src="icon.png" />
     <access origin="*" />
     <access launch-external="true" origin="tel:*" />
@@ -19,13 +25,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <preference name="phonegap-version" value="cli-6.5.0" />
-    <preference name="pgb-builder-version" value="2" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="fullscreen" value="false" />
     <preference name="android-windowSoftInputMode" value="adjustResize" />
-    <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="SplashMaintainAspectRatio" value="false" />
+    <preference name="AndroidLaunchMode" value="singleTask" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
+    <preference name="pgb-builder-version" value="2" />
     <preference name="android-build-tool" value="gradle" />
 </widget>
