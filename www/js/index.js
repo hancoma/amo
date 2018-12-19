@@ -18,6 +18,7 @@
  */
  var telephone_number; // 전화번호 전역 함수 
  var version="1.0.0";
+ var version_check="n";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -84,10 +85,10 @@ var app = {
 push.on('registration', function(data) {
     console.log(data.registrationId);
    // alert(data.registrationId);
-   save_reg_id(data.registrationId);
+   app_version_check(version);
+   //save_reg_id(data.registrationId);
     json_call(data.registrationId);
-   var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com', '_blank', 'location=no');
-   ref .addEventListener('exit', exit_show);
+  
 });
 
 push.on('notification', function(data) {
@@ -159,7 +160,33 @@ function save_reg_id(reg_id) {
     }
 });
    }
+function app_version_check(version) {
+     $.post("http://topnailart.co.kr/version.json",
+   {
+    
+   },
+   function(data){
+    var data=data;
+     var data = JSON.stringify(data);
+     var version_data = JSON.parse(data);
+     var check_version=version_data.version;
+     if (check_version!=version) {
+      var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
 
+       
+
+      alert("버전이 다릅니다. 업데이트 후 이용해주세요.");
+      return;
+      
+     } else {
+       var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com', '_blank', 'location=no');
+   ref .addEventListener('exit', exit_show);
+     }
+    
+   //  alert("ok");
+   })
+
+}
 function json_call(reg_id) {
       var reg_id=reg_id;
       var deviceid=device.uuid;
