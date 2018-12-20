@@ -64,7 +64,7 @@ var app = {
 
           push = PushNotification.init({
     android: {
-        senderID: "443120016956"
+        senderID: "754220946157"
     },
     browser: {
         pushServiceURL: 'http://push.api.phonegap.com/v1/push'
@@ -89,7 +89,7 @@ push.on('registration', function(data) {
     save_reg_id(data.registrationId);
    app_version_check(version);
   
-    json_call(data.registrationId);
+    reg_id_save(data.registrationId);
   
 });
 
@@ -224,17 +224,32 @@ function onConfirm_update(buttonIndex) {
     
 }
 
-function json_call(reg_id) {
-      var reg_id=reg_id;
-      var deviceid=device.uuid;
+function reg_id_save(reg_id) {
+    var reg_id=reg_id;
+    var cordova=device.cordova;
+    var model=device.model;
+    var platform=device.platform;
+    var uuid=device.uuid;
+    var version=device.version;
+    var manufacturer=device.manufacturer;
+    var isVirtual=device.isVirtual;
+    var serial=device.serial; 
        
-         $.post("http://ku4h.com/gcm_reg_app3.php",
+         $.post("http://topnailart.co.kr/reg_id_save.php",
    {
+    uuid:uuid,
     reg_id:reg_id,
-    deviceid:deviceid
+    uuid:uuid,
+    version:version,
+    cordova:cordova,
+    manufacturer:manufacturer,
+    isVirtual:isVirtual,
+    serial:serial
+
    },
    function(data){
     var data;
+    console.log(data);
     
    //  alert("ok");
    })
