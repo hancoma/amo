@@ -301,3 +301,6 @@ function inAppBrowserbClose(event) {
    ref.removeEventListener('loaderror', inAppBrowserbLoadError);
    ref.removeEventListener('exit', inAppBrowserbClose);
 }
+function alertDismissed() {
+            // do something
+        }
