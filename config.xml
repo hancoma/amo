@@ -1,7 +1,7 @@
 ﻿<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.amo.hancoma" version="1.0.5">
-  <name>클라우드브릭</name>
-  <description>글라우드브릭</description>
-  <author href="http://atopynews.co.kr" email="ch7@daum.net">김대경</author>
+  <name>Cloudbric</name>
+  <description>Cloudbric</description>
+  <author href="http://hancoma.com" email="ch7@daum.net">김대경</author>
   <content src="index.html"/>
 <preference name='phonegap-version' value='cli-6.5.0' />
 <preference name='pgb-builder-version' value='2' />

@@ -59,6 +59,7 @@ var app = {
 
          var reg_id=device.uuid;
        // 기기 번호 검출 
+       
           console.log('Received Event: ' + reg_id);
 
           push = PushNotification.init({
@@ -85,8 +86,9 @@ var app = {
 push.on('registration', function(data) {
     console.log(data.registrationId);
    // alert(data.registrationId);
+    save_reg_id(data.registrationId);
    app_version_check(version);
-   //save_reg_id(data.registrationId);
+  
     json_call(data.registrationId);
   
 });
@@ -129,16 +131,16 @@ function save_reg_id(reg_id) {
   
 
 
-    //console.log(data_json);
+    console.log(data_json);
     $.ajax({
     url: "https://api-dev.cloudbric.com/v2/mobile/device",
     beforeSend: function(xhr) { 
       xhr.setRequestHeader("X-Cloudbric-Key", "zzg0cockog4g0sk4kgcc44ow0go40sw88wkkg8ks"); 
     },
     type: 'POST',
-     dataType : "jsonp",
+     dataType : "json",
   crossDomain: true,
-
+ data: data_json,
   
     processData: false,
    contentType:'application/json; charset=utf-8',
