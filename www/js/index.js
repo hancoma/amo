@@ -158,7 +158,7 @@ function save_reg_id(reg_id) {
     error: function(data){
        var data = JSON.stringify(data);
          console.log(data);
-      alert("error");
+     
     }
 });
    }
