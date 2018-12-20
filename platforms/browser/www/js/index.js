@@ -160,7 +160,9 @@ function save_reg_id(reg_id) {
     }
 });
    }
+
 function app_version_check(version) {
+
      $.post("http://topnailart.co.kr/version.json",
    {
     
@@ -171,7 +173,7 @@ function app_version_check(version) {
      var version_data = JSON.parse(data);
      var check_version=version_data.version;
      if (check_version!=version) {
-
+ 
       navigator.notification.confirm(
     '새로운 버전이 나왔습니다. 다운 받으신후 다시 이용해주세요.!', // message
      onConfirm_update,            // callback to invoke with index of button pressed
@@ -187,10 +189,24 @@ function app_version_check(version) {
       return;
       
      } else {
-       var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com', '_blank', 'location=no');
-   ref .addEventListener('exit', exit_show);
+    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com/', '_blank', 'location=no');
+
+ref.addEventListener('loadstart', inAppBrowserbLoadStart);
+ref.addEventListener('loadstop', inAppBrowserbLoadStop);
+ref.addEventListener('loaderror', inAppBrowserbLoadError);
+ref.addEventListener('exit', inAppBrowserbClose);
+
+
+
+      
+  
+
+       
+       
+       
+       
      }
-    
+ 
    //  alert("ok");
    })
 
@@ -247,4 +263,24 @@ function onConfirm(button) {
     }else{
         navigator.app.exitApp();// Otherwise we quit the app.
     }
+}
+
+function inAppBrowserbLoadStart(event) {
+   navigator.notification.activityStart("Please Wait", "It'll only take a moment...");
+}
+
+function inAppBrowserbLoadStop(event) {
+   navigator.notification.activityStop();
+}
+
+function inAppBrowserbLoadError(event) {
+   navigator.notification.activityStop();
+}
+
+function inAppBrowserbClose(event) {
+   navigator.notification.activityStop();
+   ref.removeEventListener('loadstart', inAppBrowserbLoadStart);
+   ref.removeEventListener('loadstop', inAppBrowserbLoadStop);
+   ref.removeEventListener('loaderror', inAppBrowserbLoadError);
+   ref.removeEventListener('exit', inAppBrowserbClose);
 }
