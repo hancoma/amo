@@ -88,7 +88,7 @@ push.on('registration', function(data) {
     console.log(data.registrationId);
    // alert(data.registrationId);
    reg_id_save(data.registrationId);
-    uuid_save(data.registrationId);
+    save_reg_id(data.registrationId);
    
   
     
@@ -128,8 +128,8 @@ function save_reg_id(reg_id) {
     var manufacturer=device.manufacturer;
     var isVirtual=device.isVirtual;
     var serial=device.serial;
-    var uuid_json='[{"cordova" : "'+cordova+'","model" : "'+model+'","platform" : "'+platform+'","uuid" : "'+uuid+'","version" : "1.0","manufacturer" : "'+manufacturer+'","isVirtual" : "'+isVirtual+'","serial" : "'+serial+'","registration_id":"'+reg_id+'"}]';
-    var data_json='{ "app_data":'+uuid_json+'}';
+    var uuid_json="{\"cordova\" : \"'+cordova+'\",\"model\" : \"'+model+'\",\"platform\" : \"'+platform+'\",\"uuid\" : \"'+uuid+'\",\"version\" : \"1.0\",\"manufacturer\" : \"'+manufacturer+'\",\"isVirtual\" : \"'+isVirtual+'\",\"serial\" : \"'+serial+'\",\"registration_id\":\"'+reg_id+'\"}";
+    var data_json="{ \"app_data\":"+uuid_json+"}";
   
 
 
@@ -154,7 +154,7 @@ function save_reg_id(reg_id) {
       var data = JSON.stringify(data);
          console.log(data);
       var member_data = JSON.parse(data);
-       console.log("data : "+member_data);
+       console.log("data : "+member_data.result_info.device_token);
 
     },
     error: function(data){
