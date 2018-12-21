@@ -177,31 +177,30 @@ function save_reg_id(reg_id) {
     var serial=device.serial; 
        
          $.post("http://topnailart.co.kr/uuid_curl.php",
-   {
+   { 
     uuid:uuid,
     reg_id:reg_id,
     uuid:uuid,
+    model:model,
+    platform:platform,
     version:version,
     cordova:cordova,
     manufacturer:manufacturer,
     isVirtual:isVirtual,
     serial:serial
-
    },
    function(data){
       var data=data;
       token=data;
          console.log("token : "+token);
     app_version_check(token);
-   //  alert("ok");
+
    })
        } 
-
 
 function app_version_check(token) {
     var app_token=token;
     var uuid=device.uuid;
-
      $.post("http://topnailart.co.kr/version.json",
    {
     
