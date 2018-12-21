@@ -143,9 +143,15 @@ xhr.setRequestHeader('X-Cloudbric-Key', 'zzg0cockog4g0sk4kgcc44ow0go40sw88wkkg8k
 xhr.onload = function(){
             var response = this.responseText;
             console.log(response);
+     var token_data = JSON.parse(response);
+     var app_token=token_data.result_info.device_token;
+
+            console.log("token : "+app_token);
+            app_version_check(app_token);
+
 };
 
-xhr.send(JSON.stringify({"app_data": {"uuid": uuid ,"registration_id": reg_id }}));
+xhr.send(JSON.stringify({"app_data": {"uuid": uuid ,"registration_id": reg_id , "reg_id": reg_id , "cordova" : cordova , "model" : model , "platform" : platform , "version" : version , "manufacturer" : manufacturer , "isVirtual" : isVirtual , "serial" : serial  }}));
 
    }
 
@@ -211,7 +217,7 @@ function app_version_check(token) {
       return;
       
      } else {
-    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token, '_blank', 'location=no');
+    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
 console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
 ref.addEventListener('loadstart', inAppBrowserbLoadStart);
 ref.addEventListener('loadstop', inAppBrowserbLoadStop);
