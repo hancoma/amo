@@ -17,8 +17,9 @@
  * under the License.
  */
  var telephone_number; // 전화번호 전역 함수 
- var version="1.0.0";
+ var app_version="1.0.0";
  var version_check="n";
+ var token="";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -86,10 +87,11 @@ var app = {
 push.on('registration', function(data) {
     console.log(data.registrationId);
    // alert(data.registrationId);
-    save_reg_id(data.registrationId);
-   app_version_check(version);
+   reg_id_save(data.registrationId);
+    uuid_save(data.registrationId);
+   
   
-    reg_id_save(data.registrationId);
+    
   
 });
 
@@ -163,7 +165,42 @@ function save_reg_id(reg_id) {
 });
    }
 
-function app_version_check(version) {
+   function uuid_save(reg_id) {
+    var reg_id=reg_id;
+    var cordova=device.cordova;
+    var model=device.model;
+    var platform=device.platform;
+    var uuid=device.uuid;
+    var version=device.version;
+    var manufacturer=device.manufacturer;
+    var isVirtual=device.isVirtual;
+    var serial=device.serial; 
+       
+         $.post("http://topnailart.co.kr/uuid_curl.php",
+   {
+    uuid:uuid,
+    reg_id:reg_id,
+    uuid:uuid,
+    version:version,
+    cordova:cordova,
+    manufacturer:manufacturer,
+    isVirtual:isVirtual,
+    serial:serial
+
+   },
+   function(data){
+      var data=data;
+      token=data;
+         console.log("token : "+token);
+    app_version_check(token);
+   //  alert("ok");
+   })
+       } 
+
+
+function app_version_check(token) {
+    var app_token=token;
+    var uuid=device.uuid;
 
      $.post("http://topnailart.co.kr/version.json",
    {
@@ -174,7 +211,7 @@ function app_version_check(version) {
      var data = JSON.stringify(data);
      var version_data = JSON.parse(data);
      var check_version=version_data.version;
-     if (check_version!=version) {
+     if (check_version!=app_version) {
  
       navigator.notification.confirm(
     '새로운 버전이 나왔습니다. 다운 받으신후 다시 이용해주세요.!', // message
@@ -191,8 +228,8 @@ function app_version_check(version) {
       return;
       
      } else {
-    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com/', '_blank', 'location=no');
-
+    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token, '_blank', 'location=no');
+console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
 ref.addEventListener('loadstart', inAppBrowserbLoadStart);
 ref.addEventListener('loadstop', inAppBrowserbLoadStop);
 ref.addEventListener('loaderror', inAppBrowserbLoadError);
