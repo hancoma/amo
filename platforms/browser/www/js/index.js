@@ -17,7 +17,7 @@
  * under the License.
  */
  var telephone_number; // 전화번호 전역 함수 
- var app_version="1.0.0";
+ var app_version="1.2.1";
  var version_check="n";
  var token="";
 var app = {
@@ -303,6 +303,7 @@ function onConfirm_update(buttonIndex) {
       var buttonIndex=buttonIndex;
       if (buttonIndex==1) {
           var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
+           navigator.app.exitApp();
       } else if (buttonIndex==2) {
         navigator.app.exitApp();
       }
