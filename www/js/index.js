@@ -147,6 +147,7 @@ xhr.onload = function(){
      var app_token=token_data.result_info.device_token;
 
             console.log("token : "+app_token);
+
             app_version_check(app_token);
 
 };
@@ -187,8 +188,66 @@ xhr.send(JSON.stringify({"app_data": {"uuid": uuid ,"registration_id": reg_id , 
 
    })
        } 
-
 function app_version_check(token) {
+ $.ajax({
+    url: "https://api-dev.cloudbric.com/v2/mobile/version?platform=android&app_id=com.cloudbric.hancoma&current_version="+app_version,
+    beforeSend: function(xhr) { 
+      xhr.setRequestHeader("X-Cloudbric-Key", "zzg0cockog4g0sk4kgcc44ow0go40sw88wkkg8ks"); 
+    },
+    type: 'GET',
+    dataType: 'json',
+    contentType: 'application/json',
+    processData: false,
+    data: '{"current_version": "'+app_version+'"}',
+    success: function (data) {
+      var data = JSON.stringify(data);
+      console.log(data);
+      var version_data = JSON.parse(data);
+     var last_version=version_data.result_info.device_app_info.latest_version;
+     console.log("last : "+last_version);
+      if (last_version!=app_version) {
+ 
+      navigator.notification.confirm(
+    '새로운 버전이 나왔습니다. 다운 받으신후 다시 이용해주세요.!', // message
+     onConfirm_update,            // callback to invoke with index of button pressed
+    '업데이트',           // title
+    ['업데이트','종료']     // buttonLabels
+    );
+
+      //var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
+
+       
+
+      //alert("버전이 다릅니다. 업데이트 후 이용해주세요.");
+      return;
+      
+     } else {
+    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
+console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
+ref.addEventListener('loadstart', inAppBrowserbLoadStart);
+ref.addEventListener('loadstop', inAppBrowserbLoadStop);
+ref.addEventListener('loaderror', inAppBrowserbLoadError);
+ref.addEventListener('exit', inAppBrowserbClose);
+
+
+
+      
+  
+
+       
+       
+       
+       
+     }
+    },
+    error: function(data){
+      var data = JSON.stringify(data);
+      console.log(data);
+      
+    }
+});
+}
+function app_version_check2(token) {
     var app_token=token;
     var uuid=device.uuid;
      $.post("http://topnailart.co.kr/version.json",

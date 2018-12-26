@@ -588,6 +588,30 @@ module.exports = [
             "navigator.notification",
             "navigator"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+        "id": "cordova-plugin-x-toast.Toast",
+        "pluginId": "cordova-plugin-x-toast",
+        "clobbers": [
+            "window.plugins.toast"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+        "id": "cordova-plugin-actionsheet.ActionSheet",
+        "pluginId": "cordova-plugin-actionsheet",
+        "clobbers": [
+            "window.plugins.actionsheet"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-actionsheet/src/browser/ActionSheetProxy.js",
+        "id": "cordova-plugin-actionsheet.ActionSheetProxy",
+        "pluginId": "cordova-plugin-actionsheet",
+        "merges": [
+            ""
+        ]
     }
 ];
 module.exports.metadata = 
@@ -612,7 +636,9 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.2.1",
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-vibration": "2.1.5",
-    "cordova-plugin-whitelist": "1.2.2"
+    "cordova-plugin-whitelist": "1.2.2",
+    "cordova-plugin-x-toast": "2.7.2",
+    "cordova-plugin-actionsheet": "2.3.3"
 }
 // BOTTOM OF METADATA
 });
