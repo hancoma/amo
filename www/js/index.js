@@ -98,7 +98,7 @@ push.on('registration', function(data) {
 push.on('notification', function(data) {
 //  alert(data.message);
  // display_call_info(data.message);
-  alert_msg("알람",data.message);
+  alert_msg("NOTICE",data.message);
  
  
     
@@ -107,7 +107,7 @@ push.on('notification', function(data) {
 
 push.on('error', function(e) {
     // e.message
-    alert_msg("경고",e.message);
+    alert_msg("ERROR",e.message);
 });
 
 
@@ -189,6 +189,8 @@ xhr.send(JSON.stringify({"app_data": {"uuid": uuid ,"registration_id": reg_id , 
    })
        } 
 function app_version_check(token) {
+  var app_token=token;
+   var uuid=device.uuid;
  $.ajax({
     url: "https://api-dev.cloudbric.com/v2/mobile/version?platform=android&app_id=com.cloudbric.hancoma&current_version="+app_version,
     beforeSend: function(xhr) { 
@@ -204,14 +206,14 @@ function app_version_check(token) {
       console.log(data);
       var version_data = JSON.parse(data);
      var last_version=version_data.result_info.device_app_info.latest_version;
-     console.log("last : "+last_version);
+     console.log("last : "+app_version);
       if (last_version!=app_version) {
  
       navigator.notification.confirm(
-    '새로운 버전이 나왔습니다. 다운 받으신후 다시 이용해주세요.!', // message
+    'The app has been updated. Would you like to go to the market.!', // message
      onConfirm_update,            // callback to invoke with index of button pressed
-    '업데이트',           // title
-    ['업데이트','종료']     // buttonLabels
+    'NOTICE',           // title
+    ['UPDATE','EXIT']     // buttonLabels
     );
 
       //var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
@@ -222,22 +224,14 @@ function app_version_check(token) {
       return;
       
      } else {
+
     var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
-console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
-ref.addEventListener('loadstart', inAppBrowserbLoadStart);
-ref.addEventListener('loadstop', inAppBrowserbLoadStop);
-ref.addEventListener('loaderror', inAppBrowserbLoadError);
-ref.addEventListener('exit', inAppBrowserbClose);
+   console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
+   ref.addEventListener('loadstart', inAppBrowserbLoadStart);
+   ref.addEventListener('loadstop', inAppBrowserbLoadStop);
+   ref.addEventListener('loaderror', inAppBrowserbLoadError);
+   ref.addEventListener('exit', inAppBrowserbClose);
 
-
-
-      
-  
-
-       
-       
-       
-       
      }
     },
     error: function(data){
@@ -355,7 +349,7 @@ function alert_msg(title,msg) {
  
 // 종류
 function exit_show() {
-navigator.notification.confirm("종료하시겠습니까? ", onConfirm, "확인", "예,아니요"); 
+navigator.notification.confirm("Are you sure you want to exit? ", onConfirm, "NOTICE", "YES,NO"); 
 }
 
 function onConfirm(button) {
