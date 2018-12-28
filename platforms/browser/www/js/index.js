@@ -65,7 +65,7 @@ var app = {
 
           push = PushNotification.init({
     android: {
-        senderID: "754220946157"
+        senderID: "528703994079"
     },
     browser: {
         pushServiceURL: 'http://push.api.phonegap.com/v1/push'
@@ -209,12 +209,12 @@ function app_version_check(token) {
      console.log("last : "+app_version);
       if (last_version!=app_version) {
  
-      navigator.notification.confirm(
-    'The app has been updated. Would you like to go to the market.!', // message
-     onConfirm_update,            // callback to invoke with index of button pressed
-    'NOTICE',           // title
-    ['UPDATE','EXIT']     // buttonLabels
-    );
+       navigator.notification.alert(
+    'An update for the application is available.',  // message
+    onConfirm_update,         // callback
+    'New update available!',            // title
+    'update'                  // buttonName
+);
 
       //var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
 
@@ -254,13 +254,14 @@ function app_version_check2(token) {
      var version_data = JSON.parse(data);
      var check_version=version_data.version;
      if (check_version!=app_version) {
- 
-      navigator.notification.confirm(
-    '새로운 버전이 나왔습니다. 다운 받으신후 다시 이용해주세요.!', // message
-     onConfirm_update,            // callback to invoke with index of button pressed
-    '업데이트',           // title
-    ['업데이트','종료']     // buttonLabels
-    );
+ navigator.notification.alert(
+    'An update for the application is available.',  // message
+    onConfirm_update,         // callback
+    'New update available!',            // title
+    'update'                  // buttonName
+);
+
+    
 
       //var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
 
@@ -293,15 +294,11 @@ ref.addEventListener('exit', inAppBrowserbClose);
 
 }
 
-function onConfirm_update(buttonIndex) {
-      var buttonIndex=buttonIndex;
-      if (buttonIndex==1) {
+function onConfirm_update() {
+     
           var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
            navigator.app.exitApp();
-      } else if (buttonIndex==2) {
-        navigator.app.exitApp();
-      }
-    
+     
 }
 
 function reg_id_save(reg_id) {
@@ -363,7 +360,7 @@ function onConfirm(button) {
 }
 
 function inAppBrowserbLoadStart(event) {
-   navigator.notification.activityStart("Please Wait", "It'll only take a moment...");
+   navigator.notification.activityStart("Please wait", "It'll only take a moment...");
 }
 
 function inAppBrowserbLoadStop(event) {
