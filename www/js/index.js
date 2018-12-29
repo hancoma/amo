@@ -192,7 +192,7 @@ function app_version_check(token) {
   var app_token=token;
    var uuid=device.uuid;
  $.ajax({
-    url: "https://api-dev.cloudbric.com/v2/mobile/version?platform=android&app_id=com.cloudbric.hancoma&current_version="+app_version,
+    url: "https://api-dev.cloudbric.com/v2/mobile/version?platform=android&app_id=com.cloudbric.console&current_version="+app_version,
     beforeSend: function(xhr) { 
       xhr.setRequestHeader("X-Cloudbric-Key", "zzg0cockog4g0sk4kgcc44ow0go40sw88wkkg8ks"); 
     },
