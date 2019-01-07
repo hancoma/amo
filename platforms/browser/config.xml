@@ -10,6 +10,7 @@
     <description>Cloudbric</description>
     <author email="ch7@daum.net" href="http://hancoma.com">김대경</author>
     <content src="index.html" />
+    <gap:plugin name="cordova-plugin-x-toast" source="npm" />
     <universal-links>
         <host name="cloudbric.page.link" scheme="https" />
         <host name="cloudbric-app.firebaseapp.com" scheme="https">

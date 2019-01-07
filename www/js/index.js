@@ -224,8 +224,9 @@ function app_version_check(token) {
       return;
       
      } else {
+    toast('Toast Message','short','bottom');
 
-    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
+    //var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
    console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
    ref.addEventListener('loadstart', inAppBrowserbLoadStart);
    ref.addEventListener('loadstop', inAppBrowserbLoadStop);
@@ -271,6 +272,8 @@ function app_version_check2(token) {
       return;
       
      } else {
+
+
     var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
 console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
 ref.addEventListener('loadstart', inAppBrowserbLoadStart);
@@ -293,6 +296,22 @@ ref.addEventListener('exit', inAppBrowserbClose);
    })
 
 }
+
+var toast = function (mes,dur,pos) {
+ window.plugins.toast.showWithOptions({
+      message: 'My message',
+      // More config here...
+  },
+      //Success callback
+      function(args) {
+          console.log(args.event);
+          //This will print 'hide'
+      }, 
+      function(error) {
+          console.error('toast error: ', error);
+      }
+  );
+};
 
 function onConfirm_update() {
      
