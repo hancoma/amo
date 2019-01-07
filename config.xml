@@ -29,10 +29,7 @@
   <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0"/>
   <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
   <plugin name="nl.x-services.plugins.toast" spec="2.0" source="pgb" />
-<plugin name="cordova-plugin-x-toast" source="npm"  spec="~2.7.2">/>
-<feature name="Toast">
-  <param name="android-package" value="nl.xservices.plugins.Toast" />
-</feature>
+ 
  <universal-links>
     <host name="cloudbric.page.link" scheme="https" />
     <host name="cloudbric-app.firebaseapp.com" scheme="https">
