@@ -98,7 +98,8 @@ push.on('registration', function(data) {
 push.on('notification', function(data) {
 //  alert(data.message);
  // display_call_info(data.message);
-  alert_msg("NOTICE",data.message);
+  toast(data.message,'short','bottom');
+  //alert_msg("NOTICE",data.message);
  
  
     
@@ -224,9 +225,9 @@ function app_version_check(token) {
       return;
       
      } else {
-    toast('Toast Message','short','bottom');
+   
 
-    //var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
+    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
    console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
    ref.addEventListener('loadstart', inAppBrowserbLoadStart);
    ref.addEventListener('loadstop', inAppBrowserbLoadStop);
