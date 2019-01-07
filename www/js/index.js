@@ -298,19 +298,7 @@ ref.addEventListener('exit', inAppBrowserbClose);
 }
 
 var toast = function (mes,dur,pos) {
- window.plugins.toast.showWithOptions({
-      message: 'My message',
-      // More config here...
-  },
-      //Success callback
-      function(args) {
-          console.log(args.event);
-          //This will print 'hide'
-      }, 
-      function(error) {
-          console.error('toast error: ', error);
-      }
-  );
+window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
 };
 
 function onConfirm_update() {
