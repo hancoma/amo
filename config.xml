@@ -28,7 +28,8 @@
    <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2"/>
   <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0"/>
   <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
-  <plugin name="ToastPlugin" value="org.apache.cordova.plugin.ToastPlugin"/>
+  <plugin name="nl.x-services.plugins.toast" spec="2.0" source="pgb" />
+ 
  <universal-links>
     <host name="cloudbric.page.link" scheme="https" />
     <host name="cloudbric-app.firebaseapp.com" scheme="https">
