@@ -60,7 +60,7 @@ var app = {
     },
 
     onmain : function() {
-document.addEventListener("backbutton", onBackKeyDown, false); 
+document.addEventListener("backbutton", exit_show, false); 
          var reg_id=device.uuid;
        // 기기 번호 검출 
        
@@ -237,21 +237,9 @@ function app_version_check(token) {
    ref.addEventListener('loaderror', inAppBrowserbLoadError);
    //ref.addEventListener("backbutton", exit_show);
    ref.addEventListener("backbutton", function () { alert("asd"); exit;})
-   ref.addEventListener('exit', function() {
-    var toast = function (mes,dur,pos) {
-window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
-};
-    var jbResult = confirm( 'Lorem ipsum dolor' );
-      if(jbResult==true) {
-        
-        navigator.app.exitApp();
-      } else {
- var ref2 = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=no');
-  
-      }
-   });
+   ref.addEventListener('exit', exit_show);
 
-     }
+     } 
     },
     error: function(data){
       var data = JSON.stringify(data);
