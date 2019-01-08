@@ -20,6 +20,7 @@
  var app_version="1.0.0";
  var version_check="n";
  var token="";
+ var ref_app="";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -38,7 +39,8 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
      //  window.plugins.sim.getSimInfo(successCallback, errorCallback);
-       document.addEventListener("backbutton", exit_show, false);
+       
+
         app.receivedEvent('deviceready');
 
     },
@@ -52,7 +54,8 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    
+    document.addEventListener("backbutton", onBackKeyDown, false); 
+
             app.onmain();
     },
 
@@ -87,7 +90,7 @@ var app = {
 push.on('registration', function(data) {
     console.log(data.registrationId);
    // alert(data.registrationId);
-   reg_id_save(data.registrationId);
+   //reg_id_save(data.registrationId);
     save_reg_id(data.registrationId);
    
   
@@ -227,12 +230,23 @@ function app_version_check(token) {
      } else {
    
 
-    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
+  ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=yes');
    console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
    ref.addEventListener('loadstart', inAppBrowserbLoadStart);
    ref.addEventListener('loadstop', inAppBrowserbLoadStop);
    ref.addEventListener('loaderror', inAppBrowserbLoadError);
-   ref.addEventListener('exit', inAppBrowserbClose);
+   //ref.addEventListener("backbutton", exit_show);
+   ref.addEventListener("backbutton", function () { alert("asd"); exit;})
+   ref.addEventListener('exit', function() {
+    var jbResult = confirm( 'Lorem ipsum dolor' );
+      if(jbResult==true) {
+        
+        navigator.app.exitApp();
+      } else {
+ var ref2 = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=no');
+  
+      }
+   });
 
      }
     },
@@ -243,60 +257,7 @@ function app_version_check(token) {
     }
 });
 }
-function app_version_check2(token) {
-    var app_token=token;
-    var uuid=device.uuid;
-     $.post("http://topnailart.co.kr/version.json",
-   {
-    
-   },
-   function(data){
-    var data=data;
-     var data = JSON.stringify(data);
-     var version_data = JSON.parse(data);
-     var check_version=version_data.version;
-     if (check_version!=app_version) {
- navigator.notification.alert(
-    'An update for the application is available.',  // message
-    onConfirm_update,         // callback
-    'New update available!',            // title
-    'update'                  // buttonName
-);
 
-    
-
-      //var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
-
-       
-
-      //alert("버전이 다릅니다. 업데이트 후 이용해주세요.");
-      return;
-      
-     } else {
-
-
-    var ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no');
-console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
-ref.addEventListener('loadstart', inAppBrowserbLoadStart);
-ref.addEventListener('loadstop', inAppBrowserbLoadStop);
-ref.addEventListener('loaderror', inAppBrowserbLoadError);
-ref.addEventListener('exit', inAppBrowserbClose);
-
-
-
-      
-  
-
-       
-       
-       
-       
-     }
- 
-   //  alert("ok");
-   })
-
-}
 
 var toast = function (mes,dur,pos) {
 window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
@@ -437,3 +398,6 @@ function alertDismissed() {
     }
 });
    }
+   function onBackKeyDown(e) { 
+    e.preventDefault(); 
+} 
