@@ -3,8 +3,7 @@
   <description>Cloudbric</description>
   <author href="http://hancoma.com" email="ch7@daum.net">김대경</author>
   <content src="index.html"/>
- 
-  <preference name="Orientation" value="landscape" />
+ <preference name="orientation" value="portrait" />
 <preference name='phonegap-version' value='cli-6.5.0' />
 <preference name='pgb-builder-version' value='2' />
   <preference name="DisallowOverscroll" value="true"/>
