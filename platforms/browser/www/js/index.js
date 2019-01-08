@@ -54,13 +54,13 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    document.addEventListener("backbutton", onBackKeyDown, false); 
+    
 
             app.onmain();
     },
 
     onmain : function() {
-
+document.addEventListener("backbutton", onBackKeyDown, false); 
          var reg_id=device.uuid;
        // 기기 번호 검출 
        
@@ -238,6 +238,9 @@ function app_version_check(token) {
    //ref.addEventListener("backbutton", exit_show);
    ref.addEventListener("backbutton", function () { alert("asd"); exit;})
    ref.addEventListener('exit', function() {
+    var toast = function (mes,dur,pos) {
+window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
+};
     var jbResult = confirm( 'Lorem ipsum dolor' );
       if(jbResult==true) {
         
@@ -259,9 +262,7 @@ function app_version_check(token) {
 }
 
 
-var toast = function (mes,dur,pos) {
-window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
-};
+
 
 function onConfirm_update() {
      
