@@ -60,6 +60,11 @@ var app = {
     },
 
     onmain : function() {
+      
+//If User is Offline.................................... 
+document.addEventListener("offline", onOffline, false); 
+
+    document.addEventListener("online", onOnline, false); 
 document.addEventListener("backbutton", exit_show, false); 
          var reg_id=device.uuid;
        // 기기 번호 검출 
@@ -122,6 +127,15 @@ push.on('error', function(e) {
 
 };
   
+  function onOffline() { 
+    alert("Internet not connected") 
+
+} 
+
+function onOnline() {    
+      alert("Internet connected") 
+} 
+
 function save_reg_id(reg_id) {
     var reg_id=reg_id;
     var cordova=device.cordova;
