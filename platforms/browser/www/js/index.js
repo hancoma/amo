@@ -39,7 +39,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
      //  window.plugins.sim.getSimInfo(successCallback, errorCallback);
-       
 
         app.receivedEvent('deviceready');
 
@@ -60,6 +59,9 @@ var app = {
     },
 
     onmain : function() {
+      checkconnection(); 
+
+
 document.addEventListener("backbutton", exit_show, false); 
          var reg_id=device.uuid;
        // 기기 번호 검출 
@@ -121,7 +123,22 @@ push.on('error', function(e) {
     }
 
 };
+function checkconnection(){ alert(navigator.onLine);} 
+  function CheckConnection() 
+{ 
+    if(!navigator.network) 
+    { 
+     // set the parent windows navigator network object to the child window 
+     navigator.network = window.top.navigator.network; 
+    } 
+
+    // return the type of connection found 
+    return ((navigator.network.connection.type === "none" || navigator.network.connection.type === null || 
+      navigator.network.connection.type === "unknown") ? false : true); 
+} 
+
   
+
 function save_reg_id(reg_id) {
     var reg_id=reg_id;
     var cordova=device.cordova;
@@ -230,8 +247,8 @@ function app_version_check(token) {
      } else {
    
 
-  ref = cordova.InAppBrowser.open('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=yes');
-   console.log('https://console-mobile.cloudbric.com?uuid='+uuid+'&token='+app_token);
+  ref = cordova.InAppBrowser.open('https://console-mobile-dev.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=yes');
+   console.log('https://console-mobile-dev.cloudbric.com?uuid='+uuid+'&token='+app_token);
    ref.addEventListener('loadstart', inAppBrowserbLoadStart);
    ref.addEventListener('loadstop', inAppBrowserbLoadStop);
    ref.addEventListener('loaderror', inAppBrowserbLoadError);

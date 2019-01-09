@@ -39,7 +39,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
      //  window.plugins.sim.getSimInfo(successCallback, errorCallback);
-       
 
         app.receivedEvent('deviceready');
 
@@ -60,11 +59,9 @@ var app = {
     },
 
     onmain : function() {
-      
-//If User is Offline.................................... 
-document.addEventListener("offline", onOffline, false); 
+      checkconnection(); 
 
-    document.addEventListener("online", onOnline, false); 
+
 document.addEventListener("backbutton", exit_show, false); 
          var reg_id=device.uuid;
        // 기기 번호 검출 
@@ -126,15 +123,21 @@ push.on('error', function(e) {
     }
 
 };
+function checkconnection(){ alert(navigator.onLine);} 
+  function CheckConnection() 
+{ 
+    if(!navigator.network) 
+    { 
+     // set the parent windows navigator network object to the child window 
+     navigator.network = window.top.navigator.network; 
+    } 
+
+    // return the type of connection found 
+    return ((navigator.network.connection.type === "none" || navigator.network.connection.type === null || 
+      navigator.network.connection.type === "unknown") ? false : true); 
+} 
+
   
-  function onOffline() { 
-    alert("Internet not connected") 
-
-} 
-
-function onOnline() {    
-      alert("Internet connected") 
-} 
 
 function save_reg_id(reg_id) {
     var reg_id=reg_id;
