@@ -17,11 +17,12 @@
  * under the License.
  */
  var telephone_number; // 전화번호 전역 함수 
- var app_version="1.1.1";
+ var app_version="1.1.5";
  var version_check="n";
  var token="";
  var ref_app="";
-
+ var app_token="";
+ var mode="normal";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -46,13 +47,22 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    
+document.addEventListener("offline", function(){  
+  // navigator.notification.confirm(" Connect and try again. ", onConfirm, "No Internet", "EXIT"); 
+   navigator.notification.activityStop();
+   mode="error";
+  
+   gopage("error.html");
+   ref.close();
 
+   }, false);    
+ 
             onmain();
     };
 
     function onmain() {
-document.addEventListener("backbutton", exit_show, false); 
+document.addEventListener("backbutton", exit_app, false); 
+
          var reg_id=device.uuid;
        // 기기 번호 검출 
        
@@ -62,8 +72,8 @@ document.addEventListener("backbutton", exit_show, false);
     android: {
         senderID: "528703994079",
         sound: true,
-            icon: 'notification_icon',
-            iconColor: 'blue'
+             icon: 'phonegap',
+    iconColor: 'blue'
     },
 
     browser: {
@@ -101,7 +111,7 @@ push.on('registration', function(data) {
 push.on('notification', function(data) {
 //  alert(data.message);
  // display_call_info(data.message);
- alert_msg("NOTICE",data.message);
+// alert_msg("NOTICE",data.message);
 
   //
  
@@ -160,6 +170,8 @@ xhr.send(JSON.stringify({"app_data": {"uuid": uuid ,"registration_id": reg_id , 
 
    }
 
+
+
    function uuid_save(reg_id) {
     var reg_id=reg_id;
     var cordova=device.cordova;
@@ -193,7 +205,7 @@ xhr.send(JSON.stringify({"app_data": {"uuid": uuid ,"registration_id": reg_id , 
    })
        } 
 function app_version_check(token) {
-  var app_token=token;
+  app_token=token;
    var uuid=device.uuid;
  $.ajax({
     url: "https://api-dev.cloudbric.com/v2/mobile/version?platform=android&app_id=com.cloudbric.console&current_version="+app_version,
@@ -230,14 +242,14 @@ function app_version_check(token) {
      } else {
    
 
-  ref = cordova.InAppBrowser.open('https://console-mobile-dev.cloudbric.com/?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=yes');
+  ref = cordova.InAppBrowser.open('https://console-mobile-dev.cloudbric.com?uuid='+uuid+'&token='+app_token+'&version='+app_version, '_blank', 'location=no,hardwareback=yes');
    console.log('https://console-mobile-dev.cloudbric.com?uuid='+uuid+'&token='+app_token);
    ref.addEventListener('loadstart', inAppBrowserbLoadStart);
    ref.addEventListener('loadstop', inAppBrowserbLoadStop);
-   ref.addEventListener('loaderror', inAppBrowserbLoadError);
+  // ref.addEventListener('loaderror', inAppBrowserbLoadError);
    ref.addEventListener("backbutton", exit_show);
    //ref.addEventListener("backbutton", function () { alert("asd"); exit;})
-   ref.addEventListener('exit', exit_show);
+   ref.addEventListener('exit', close_show);
 
      }
     },
@@ -254,7 +266,7 @@ function app_version_check(token) {
 
 function onConfirm_update() {
      
-          var ref = cordova.InAppBrowser.open('market://details?id=com.nhn.android.search', '_system', 'location=no');
+          var ref = cordova.InAppBrowser.open('market://details?id=com.cloudbric.console', '_system', 'location=no');
            navigator.app.exitApp();
      
 }
@@ -308,16 +320,36 @@ function exit_show() {
 navigator.notification.confirm("Are you sure you want to exit? ", onConfirm, "NOTICE", "YES,NO"); 
 }
 
+function close_show() {
+  if (mode!="error") {
+navigator.notification.confirm("Are you sure you want to exit? ", onConfirm, "NOTICE", "YES,NO"); 
+
+  }
+ 
+}
+
+
 function onConfirm(button) {
     if(button==2){//If User selected No, then we just do nothing
-      var ref = cordova.InAppBrowser.open('https://console-mobile-dev.cloudbric.com', '_blank', 'location=no');
-   ref .addEventListener('exit', exit_show);
-        return;
+   
+    var uuid=device.uuid;
+    
+      var ref2 = cordova.InAppBrowser.open('https://console-mobile-dev.cloudbric.com', '_blank', 'location=no');
+    console.log('https://console-mobile-dev.cloudbric.com?uuid='+uuid+'&token='+app_token);
+   ref2.addEventListener('loadstart', inAppBrowserbLoadStart);
+   ref2.addEventListener('loadstop', inAppBrowserbLoadStop);
+ //  ref2.addEventListener('loaderror', inAppBrowserbLoadError);
+   ref2.addEventListener("backbutton", exit_show);
+   //ref.addEventListener("backbutton", function () { alert("asd"); exit;})
+   ref2.addEventListener('exit', close_show);
+       
     }else{
         navigator.app.exitApp();// Otherwise we quit the app.
     }
 }
-
+function exit_app() {
+        navigator.app.exitApp();// Otherwise we quit the app.
+}
 function inAppBrowserbLoadStart(event) {
    navigator.notification.activityStart("Please wait", "It'll only take a moment...");
 }
@@ -340,6 +372,10 @@ function inAppBrowserbClose(event) {
    ref.removeEventListener('loadstop', inAppBrowserbLoadStop);
    ref.removeEventListener('loaderror', inAppBrowserbLoadError);
    ref.removeEventListener('exit', inAppBrowserbClose);
+   ref2.removeEventListener('loadstart', inAppBrowserbLoadStart);
+   ref2.removeEventListener('loadstop', inAppBrowserbLoadStop);
+   ref2.removeEventListener('loaderror', inAppBrowserbLoadError);
+   ref2.removeEventListener('exit', inAppBrowserbClose);
 }
 function alertDismissed() {
             // do something
@@ -398,4 +434,17 @@ function alertDismissed() {
 function gopage (page) {
     var page=page;
     location.href=page;
+}
+
+function show_web() {
+   var uuid=device.uuid;
+  var ref2 = cordova.InAppBrowser.open('https://console-mobile-dev.cloudbric.com', '_blank', 'location=no');
+    console.log('https://console-mobile-dev.cloudbric.com?uuid='+uuid+'&token='+app_token);
+   ref2.addEventListener('loadstart', inAppBrowserbLoadStart);
+   ref2.addEventListener('loadstop', inAppBrowserbLoadStop);
+  // ref2.addEventListener('loaderror', inAppBrowserbLoadError);
+   ref2.addEventListener("backbutton", exit_show);
+   //ref.addEventListener("backbutton", function () { alert("asd"); exit;})
+   ref2.addEventListener('exit', close_show);
+  // body...
 }
