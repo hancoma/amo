@@ -1,6 +1,6 @@
 ﻿<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.cloudbric.console" version="1.1.5" versionCode = "10015">
-    <name>Cloudbric</name>
-  <description>Cloudbric</description>
+    <name>석영브라이스톤</name>
+  <description>석영브라이스톤</description>
   <author href="http://hancoma.com" email="ch7@daum.net">김대경</author>
   <content src="index.html"/>
  <preference name="orientation" value="portrait" />
