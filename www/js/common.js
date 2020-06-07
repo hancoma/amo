@@ -863,3 +863,23 @@ function check_msg() {
 
 }
 
+function show_modal(modal_name) {
+  var modal_name="#"+modal_name;
+
+var modal = UIkit.modal(modal_name);
+
+
+    modal.show();
+UIkit.offcanvas.hide('#offcanvas-left');
+
+}
+function close_modal(modal_name) {
+  var modal_name="#"+modal_name;
+
+var modal = UIkit.modal(modal_name);
+
+
+    modal.hide();
+
+
+}
